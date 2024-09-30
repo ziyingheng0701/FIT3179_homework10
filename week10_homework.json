@@ -3,7 +3,7 @@
   "description": "Population by region with checkbox filter, Show All option, and tooltip",
   "width": 800,
   "height": 600,
-  "title": { "text": "Population Trends by Global Regions","fontSize":"25" },
+  "title": { "text": "Population Trends by Global Regions", "fontSize": 25 },
   "data": {
     "url": "https://raw.githubusercontent.com/ziyingheng0701/FIT3179_homework10/refs/heads/main/population-and-demography.csv"
   },
@@ -49,16 +49,20 @@
     "y": { "field": "Population", "type": "quantitative" },
     "color": { 
       "field": "Entity", 
-      "type": "nominal" ,
+      "type": "nominal",
+      "scale": {
+        "domain": ["Asia (UN)", "Africa (UN)", "Americas (UN)", "Latin America and the Caribbean (UN)", "Northern America (UN)", "Oceania (UN)"],
+        "range": ["#1f77b4", "#ff7f0e", "#a3a398", "#d62728", "#9467bd", "#8c564b"]
+      },
       "legend": {
-      "title": "region", 
-      "labelLimit": 200,
-      "labelExpr": "datum.value === 'Asia (UN)' ? 'Asia' : datum.value === 'Africa (UN)' ? 'Africa' : datum.value === 'Americas (UN)' ? 'Americas' : datum.value === 'Latin America and the Caribbean (UN)' ? 'Latin America' : datum.value === 'Northern America (UN)' ? 'North America' : datum.value === 'Oceania (UN)' ? 'Oceania' : datum.value"
-    }
+        "title": "Region",
+        "labelLimit": 200,
+        "labelExpr": "datum.value === 'Asia (UN)' ? 'Asia' : datum.value === 'Africa (UN)' ? 'Africa' : datum.value === 'Americas (UN)' ? 'Americas' : datum.value === 'Latin America and the Caribbean (UN)' ? 'Latin America' : datum.value === 'Northern America (UN)' ? 'North America' : datum.value === 'Oceania (UN)' ? 'Oceania' : datum.value"
+      }
     },
     "tooltip": [
       { "field": "Entity", "type": "nominal", "title": "Region" },
-      { "field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
+      { "field": "Year", "type": "temporal", "title": "Year", "format": "%Y" },
       { "field": "Population", "type": "quantitative", "title": "Population" }
     ]
   }
