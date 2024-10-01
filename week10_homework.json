@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Population by region with checkbox filter, Show All option, and tooltip",
+  "description": "Population by region with multiple checkboxes for each region",
   "width": 800,
   "height": 600,
   "title": { "text": "Population Trends by Global Regions", "fontSize": 25 },
@@ -9,35 +9,57 @@
   },
   "params": [
     {
-      "name": "SelectedRegions",
-      "value": ["Asia (UN)", "Africa (UN)", "Americas (UN)", "Latin America and the Caribbean (UN)", "Northern America (UN)", "Oceania (UN)"],
+      "name": "showAsia",
+      "value": true,
       "bind": {
-        "input": "select",
-        "options": [
-          ["Asia (UN)", "Africa (UN)", "Americas (UN)", "Latin America and the Caribbean (UN)", "Northern America (UN)", "Oceania (UN)"],
-          "Asia (UN)",
-          "Africa (UN)",
-          "Americas (UN)",
-          "Latin America and the Caribbean (UN)",
-          "Northern America (UN)",
-          "Oceania (UN)"
-        ],
-        "labels": [
-          "Show All",
-          "Asia",
-          "Africa",
-          "Americas",
-          "Latin America and the Caribbean",
-          "Northern America",
-          "Oceania"
-        ],
-        "name": "Select Region: "
+        "input": "checkbox",
+        "name": "Asia"
+      }
+    },
+    {
+      "name": "showAfrica",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Africa"
+      }
+    },
+    {
+      "name": "showAmericas",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Americas"
+      }
+    },
+    {
+      "name": "showLatinAmerica",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Latin America"
+      }
+    },
+    {
+      "name": "showNorthAmerica",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "North America"
+      }
+    },
+    {
+      "name": "showOceania",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Oceania"
       }
     }
   ],
   "transform": [
     {
-      "filter": "SelectedRegions === 'Show All' || indexof(SelectedRegions, datum.Entity) >= 0"
+      "filter": "(datum.Entity === 'Asia (UN)' && showAsia) || (datum.Entity == 'Africa (UN)' && showAfrica) || (datum.Entity == 'Americas (UN)' && showAmericas) || (datum.Entity == 'Latin America and the Caribbean (UN)' && showLatinAmerica) || (datum.Entity == 'Northern America (UN)' && showNorthAmerica) ||  (datum.Entity == 'Oceania (UN)' && showOceania)"
     }
   ],
   "mark": {
