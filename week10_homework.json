@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Population by region with milestone year markers and dotted rule lines.",
+  "width": 800,
+  "height": 600,
+  "title": { "text": "Population Trends by Global Regions", "fontSize": 25 },
+  "data": {
+    "url": "https://raw.githubusercontent.com/ziyingheng0701/FIT3179_homework10/refs/heads/main/population-and-demography.csv"
+  },
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "x": { 
+          "timeUnit": "year", 
+          "field": "Year", 
+          "type": "temporal",
+          "scale": { 
+            "domain": [1949, 2025]  
+          }
+        },
+        "y": { "field": "Population", "type": "quantitative" },
+        "color": { 
+          "field": "Entity", 
+          "type": "nominal",
+          "scale": {
+            "domain": ["Asia (UN)", "Africa (UN)", "Americas (UN)", "Latin America and the Caribbean (UN)", "Northern America (UN)", "Oceania (UN)"],
+            "range": ["#1f77b4", "#ff7f0e", "#a3a398", "#d62728", "#9467bd", "#8c564b"]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#999da0",
+        "strokeDash": [4, 4]  
+      },
+      "encoding": {
+        "x": {"datum": {"year": 1950}, "type": "temporal"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -80,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#5c5b5b"
+      },
+      "encoding": {
+        "x": {"datum": {"year": 1950}, "type": "temporal"},
+        "y": {"datum": 1500000000},
+        "text": {"value": "Post-WWII Population Boom"}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#999da0",
+        "strokeDash": [4, 4]  
+      },
+      "encoding": {
+        "x": {"datum": {"year": 2020}, "type": "temporal"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": -120,
+        "dy": -5,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#5c5b5b"
+      },
+      "encoding": {
+        "x": {"datum": {"year": 2020}, "type": "temporal"},
+        "y": {"datum": 7800000000},
+        "text": {"value": "COVID-19 Pandemic"}
+      }
+    }
+  ]
+}
