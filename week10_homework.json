@@ -124,7 +124,6 @@
         "dx": 5,
         "dy": -80,
         "fontSize": 12,
-        "fontWeight": "bold",
         "color": "#5c5b5b"
       },
       "encoding": {
@@ -150,7 +149,6 @@
         "dx": -120,
         "dy": -5,
         "fontSize": 12,
-        "fontWeight": "bold",
         "color": "#5c5b5b"
       },
       "encoding": {
