@@ -1,91 +1,86 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Population by region with multiple checkboxes for each region",
+  "description": "Population by region with milestone year markers and dotted rule lines.",
   "width": 800,
   "height": 600,
   "title": { "text": "Population Trends by Global Regions", "fontSize": 25 },
   "data": {
     "url": "https://raw.githubusercontent.com/ziyingheng0701/FIT3179_homework10/refs/heads/main/population-and-demography.csv"
   },
-  "params": [
+  "layer": [
     {
-      "name": "showAsia",
-      "value": true,
-      "bind": {
-        "input": "checkbox",
-        "name": "Asia"
+      "mark": "line",
+      "encoding": {
+        "x": { 
+          "timeUnit": "year", 
+          "field": "Year", 
+          "type": "temporal",
+          "scale": { 
+            "domain": [1949, 2025]  
+          }
+        },
+        "y": { "field": "Population", "type": "quantitative" },
+        "color": { 
+          "field": "Entity", 
+          "type": "nominal",
+          "scale": {
+            "domain": ["Asia (UN)", "Africa (UN)", "Americas (UN)", "Latin America and the Caribbean (UN)", "Northern America (UN)", "Oceania (UN)"],
+            "range": ["#1f77b4", "#ff7f0e", "#a3a398", "#d62728", "#9467bd", "#8c564b"]
+          }
+        }
       }
     },
     {
-      "name": "showAfrica",
-      "value": true,
-      "bind": {
-        "input": "checkbox",
-        "name": "Africa"
-      }
-    },
-    {
-      "name": "showAmericas",
-      "value": true,
-      "bind": {
-        "input": "checkbox",
-        "name": "Americas"
-      }
-    },
-    {
-      "name": "showLatinAmerica",
-      "value": true,
-      "bind": {
-        "input": "checkbox",
-        "name": "Latin America"
-      }
-    },
-    {
-      "name": "showNorthAmerica",
-      "value": true,
-      "bind": {
-        "input": "checkbox",
-        "name": "North America"
-      }
-    },
-    {
-      "name": "showOceania",
-      "value": true,
-      "bind": {
-        "input": "checkbox",
-        "name": "Oceania"
-      }
-    }
-  ],
-  "transform": [
-    {
-      "filter": "(datum.Entity === 'Asia (UN)' && showAsia) || (datum.Entity == 'Africa (UN)' && showAfrica) || (datum.Entity == 'Americas (UN)' && showAmericas) || (datum.Entity == 'Latin America and the Caribbean (UN)' && showLatinAmerica) || (datum.Entity == 'Northern America (UN)' && showNorthAmerica) ||  (datum.Entity == 'Oceania (UN)' && showOceania)"
-    }
-  ],
-  "mark": {
-    "type": "line",
-    "point": true
-  },
-  "encoding": {
-    "x": { "timeUnit": "year", "field": "Year" },
-    "y": { "field": "Population", "type": "quantitative" },
-    "color": { 
-      "field": "Entity", 
-      "type": "nominal",
-      "scale": {
-        "domain": ["Asia (UN)", "Africa (UN)", "Americas (UN)", "Latin America and the Caribbean (UN)", "Northern America (UN)", "Oceania (UN)"],
-        "range": ["#1f77b4", "#ff7f0e", "#a3a398", "#d62728", "#9467bd", "#8c564b"]
+      "mark": {
+        "type": "rule",
+        "color": "#999da0",
+        "strokeDash": [4, 4]  
       },
-      "legend": {
-        "title": "Region",
-        "labelLimit": 200,
-        "labelExpr": "datum.value === 'Asia (UN)' ? 'Asia' : datum.value === 'Africa (UN)' ? 'Africa' : datum.value === 'Americas (UN)' ? 'Americas' : datum.value === 'Latin America and the Caribbean (UN)' ? 'Latin America' : datum.value === 'Northern America (UN)' ? 'North America' : datum.value === 'Oceania (UN)' ? 'Oceania' : datum.value"
+      "encoding": {
+        "x": {"datum": {"year": 1950}, "type": "temporal"}
       }
     },
-    "tooltip": [
-      { "field": "Entity", "type": "nominal", "title": "Region" },
-      { "field": "Year", "type": "temporal", "title": "Year", "format": "%Y" },
-      { "field": "Population", "type": "quantitative", "title": "Population" }
-    ]
-  }
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -80,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#5c5b5b"
+      },
+      "encoding": {
+        "x": {"datum": {"year": 1950}, "type": "temporal"},
+        "y": {"datum": 1500000000},
+        "text": {"value": "Post-WWII Population Boom"}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#999da0",
+        "strokeDash": [4, 4]  
+      },
+      "encoding": {
+        "x": {"datum": {"year": 2020}, "type": "temporal"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": -120,
+        "dy": -5,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#5c5b5b"
+      },
+      "encoding": {
+        "x": {"datum": {"year": 2020}, "type": "temporal"},
+        "y": {"datum": 7800000000},
+        "text": {"value": "COVID-19 Pandemic"}
+      }
+    }
+  ]
 }
